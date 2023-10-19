@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "CommonJS",
+    "rootDir": "./",
+    "outDir": "./",
+    "esModuleInterop": true,
+    "strict": true,
+    "allowJs":true,
+    "checkJs":true,
+  },
+  "include":[
+      "**/*",
+      "**/*.ts"
+    ],
+    "exclude":[
+      ""
+    ],
+    "ts-node": {
+    "esm": true,
+    "compilerOptions": {
+      "module": "nodenext",
+    }
+  }
+}
