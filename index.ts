@@ -26,5 +26,3 @@ App.use('/', require('./route/userRoute'));
 connectToDB().then(() => {
    App.listen(App.get('port'), () => console.log(color.green(`App listening on port ${App.get('port')}`)));
 });
-
-//module.exports = App;
