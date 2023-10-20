@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import color from 'colors';
 import { connectToDB } from './config/db_connect';
+import { configDotenv } from 'dotenv';
+configDotenv({ path: './config/.env' });
 
 const App = express();
 

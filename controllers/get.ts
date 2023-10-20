@@ -18,7 +18,13 @@ export const getUserPersonalPosts = async (req: Request, res: Response) => {
       let friendId: any = friendPost.map((item) => item.frndId).filter((item) => item !== '');
       friendId.push(user.id);
       let user_posts = await post.find({ userId: { $in: friendId } }).sort({ _id: -1 });
-      if (user_posts) res.status(200).json({ done: true, data: user_posts });
+      let newUserPostArray = [];
+      for (let item of user_posts) {
+         let postUser = await userModel.findById(item.userId);
+         let newItem: any = { ...item.toJSON(), profileImg: postUser?.profileImg };
+         newUserPostArray.push(newItem);
+      }
+      if (user_posts) res.status(200).json({ done: true, data: newUserPostArray });
       else res.status(500).json({ done: false, data: [] });
    }
 };
@@ -93,8 +99,7 @@ export const getFriends: any = async (req: Request, res: Response) => {
          },
          { frndName: 1, frndId: 1 }
       );
-      if (friendList && friendList.length > 0)
-         res.status(200).json({ done: true, friends: friendList.filter((x) => x.frndId !== '') });
+      if (friendList && friendList.length > 0) res.status(200).json({ done: true, friends: friendList.filter((x) => x.frndId !== '') });
       else res.status(200).json({ done: true, friends: [] });
    } else res.status(200).json({ done: false, message: 'User not Found!' });
 };
