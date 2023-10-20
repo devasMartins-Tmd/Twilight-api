@@ -1,8 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import color from 'colors';
-
-const connectToDB = require('./config/db_connect');
+import { connectToDB } from './config/db_connect';
 
 const App = express();
 
@@ -12,10 +11,9 @@ App.use(
       origin: '*',
    })
 );
-// console.log(__dirname, '/dist');
 App.use(express.json({ limit: '300mb' }));
 App.use(express.urlencoded({ extended: true }));
-App.set('port', 8505);
+App.set('port', 8503);
 
 //routes
 App.use('/', require('./route/authRoute'));
