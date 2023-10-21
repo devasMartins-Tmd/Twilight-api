@@ -115,6 +115,7 @@ export const getNotifications: any = async (req: Request, res: Response) => {
          },
          { _id: 1, text: 1, type: 1, userId: 1 }
       );
+      notificationsList.reverse();
       if (notificationsList) res.status(200).json({ done: true, list: notificationsList });
       else res.status(400).json({ done: false, message: 'Error getting notifications' });
    } else res.status(404).json({ done: false, message: 'User not found' });
