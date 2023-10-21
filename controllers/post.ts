@@ -88,7 +88,7 @@ export const postAPostComment = async (req: Request, res: Response) => {
       if (postId && comment) {
          let postExist = await post.findById(postId);
          if (postExist) {
-            await postExist.updateOne({ $push: { comment: [{ text: comment, name: user.name }] } });
+            await postExist.updateOne({ $push: { comment: [{ text: comment, name: user.name, profileImg: user.profileImg }] } });
             await all.notifications.create(notifyMessage(postExist.userId, `${user.name} commented on your post`, 'success'));
             res.status(200).json({ done: true, message: 'comment posted!✅' });
          } else {
