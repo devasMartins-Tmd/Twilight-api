@@ -17,7 +17,7 @@ const post = new mongoose.Schema(
          required: ['post like required', true],
       },
       comment: {
-         type: [{ text: STRING, name: STRING, profileImg: STRING }],
+         type: [{ text: STRING, name: STRING, profileImg: STRING, ID: STRING }],
          required: ['post comment required', true],
       },
       postId: {

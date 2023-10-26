@@ -38,8 +38,18 @@ export const getPostComment = async (req: Request, res: Response) => {
       let postExist = await post.findById(postId);
       if (postExist) {
          let comments: any = postExist.comment ?? [],
-            likees = postExist.likeUserId ?? [];
-         console.log(comments);
+            likees = postExist.likeUserId ?? [],
+            newComments = [];
+
+         for (let i = 0; i < comments.length; i++) {
+            const profileImg = await userModel.findById(comments[i].ID);
+            let IMG = profileImg?.profileImg;
+            let item = comments[i];
+            item['profileImg'] = IMG;
+            newComments.push(item);
+         }
+         comments = newComments;
+
          if (comments) res.status(200).json({ done: true, comments, likees });
          else if (comments.length === 0) res.status(200).json({ done: true, comments: [] });
          else res.status(404).json({ done: false, message: 'comment not found' });
